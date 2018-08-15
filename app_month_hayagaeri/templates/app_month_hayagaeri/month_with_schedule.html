@@ -1,0 +1,51 @@
+{% extends 'app_month_hayagaeri/base.html' %}
+{% block content %}
+<a href="{% url 'month_with_schedule' month.previous.year month.previous.month %}">前月</a>
+{{ month.current | date:"Y年m月" }}
+<a href="{% url 'month_with_schedule' month.next.year month.next.month %}">次月</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th><th></th><th></th>
+      {% for w in month.week_names %}
+        <th>{{ w }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td></td><td></td><td></td>
+        {% for day in month.days %}
+          {% if month.now == day %}
+            <td class="table-success">
+          {% else %}
+            <td>
+          {% endif %}
+          {% if month.current.month != day.month %}
+            {{ day | date:"m/d" }}
+          {% else %}
+            {{ day.day }}
+          {% endif %}
+          </td>
+        {% endfor %}
+      </tr>
+    {% for p_one in month.p %}
+      <tr>
+        <td>{{ p_one.name }}</td>
+        <td><a href="{% url 'create_schedule' %}">追加</a></td>
+        <td>予<br>実</td>
+        {% for day_schedule_list in month.schedule_list %}
+          <td>
+            {% for s in day_schedule_list %}
+              {% if s.person == p_one %}
+                {{ s.hayagaeri_plan }}
+                <a href="{% url 'ryouhou' s.id %}">{{ s.hayagaeri_result }}</a>
+              {% endif %}
+            {% endfor %}
+          </td>
+        {% endfor %}
+      </tr>      
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
