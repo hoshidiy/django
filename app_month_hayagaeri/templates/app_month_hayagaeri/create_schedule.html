@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>{{title}}</h1>
+    <p>Dateはyyyy-mm-ddの形で記載してください。</p>
     <table>
         <form action="{% url 'create_schedule' %}" method="post">
         {% csrf_token %}
