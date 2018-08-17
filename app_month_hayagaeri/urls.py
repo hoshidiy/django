@@ -25,4 +25,7 @@ urlpatterns = [
     path(
         'ryouhou/<int:num>', views.ryouhou, name='ryouhou'
     ),
+    path(
+        'img/', views.img, name='img'
+    ),
 ]

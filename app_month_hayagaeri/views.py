@@ -182,3 +182,5 @@ def ryouhou(request, num):
     }
     return render(request, 'app_month_hayagaeri/ryouhou.html', params)
 
+def img(request):
+    return render(request, 'app_month_hayagaeri/img.html')
